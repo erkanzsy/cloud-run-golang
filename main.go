@@ -1,12 +1,22 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"os"
+)
 
 func main() {
 	app := fiber.New()
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World! 123")
+		hostname, _ := os.Hostname()
+		response := map[string]string{
+			"version":   "V1",
+			"path":      c.Path(),
+			"client_ip": c.IP(),
+			"hostname":  hostname,
+		}
+		return c.JSON(response)
 	})
 
 	app.Listen(":8080")
