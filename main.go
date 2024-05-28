@@ -11,7 +11,7 @@ func main() {
 	app.Get("/", func(c *fiber.Ctx) error {
 		hostname, _ := os.Hostname()
 		response := map[string]string{
-			"version":   "V1",
+			"version":   "V2",
 			"path":      c.Path(),
 			"client_ip": c.IP(),
 			"hostname":  hostname,
